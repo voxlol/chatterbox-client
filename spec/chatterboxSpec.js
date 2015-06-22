@@ -97,7 +97,6 @@ describe('chatterbox', function() {
     describe('events', function() {
       it('should add a friend upon clicking their username', function(){
         sinon.spy(app, 'addFriend');
-
         app.addMessage({
           username: 'Mel Brooks',
           text: 'I didn\'t get a harumph outa that guy.!',
@@ -114,7 +113,7 @@ describe('chatterbox', function() {
 
       it('should try to send a message upon clicking submit', function(){
         sinon.spy(app, 'handleSubmit');
-
+        debugger;
         $('#message').val('Why so many Mel Brooks quotes?');
 
         app.init();
