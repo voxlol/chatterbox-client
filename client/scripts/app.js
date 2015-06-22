@@ -1,10 +1,5 @@
 var app = {}
 
-var message = {
-    username: 'shawndrost',
-    text: 'trololo',
-    roomname: '4chan'};
-
 app.init = function(){
 
 }
@@ -42,4 +37,16 @@ app.fetch = function(fetchUrl) {
       console.error('chatterbox: Failed to recieve message');
     }
     })
+}
+
+app.clearMessages = function(){
+  $('#chats').html('');
+}
+
+app.addMessage = function(message){
+  $('#chats').append('<div>' + JSON.stringify(message) + '</div>');
+}
+
+app.addRoom = function(room){
+  $('#roomSelect').append('<div>' + JSON.stringify(room) + '</div>');
 }
