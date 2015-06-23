@@ -3,8 +3,7 @@
   <head>
 <!--     <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Cinzel:900' rel='stylesheet' type='text/css'> -->
-    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
-    <meta charset="utf-8">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>    <meta charset="utf-8">
     <title>chatterbox</title>
     <link rel="stylesheet" href="styles/styles.css">
 
@@ -30,7 +29,7 @@
           <br>
           <textarea id="addRoomName" rows "1" cols="20"></textarea>
           <br>
-          <button type="submit">Add Room</button>
+          <button type="submit" class="blueButton">Add Room</button>
         </form>
 
       </div>
@@ -39,13 +38,13 @@
       <form id="send" action="#" method="post">
         Insert message:<br>
         <!-- <input type="text" id="message"></input> -->
-        <textarea id="message" rows="10" cols="115"></textarea> <button type="submit" class="submit">Submit Message</button>
+        <textarea id="message" class="textArea" rows="10" cols="115"></textarea> <button type="submit" class="submit blueButton">Submit Message</button>
       </form>
       <form id="clear" action="#">
-        <button type="submit">Clear the messages</button>
+        <button type="submit" class="blueButton">Clear the messages</button>
       </form>
       <form id="fetch" action="#">
-        <button type="submit">Fetch messages</button>
+        <button type="submit" class="blueButton">Fetch messages</button>
       </form>
 
       <div id="chats"></div>
