@@ -82,3 +82,17 @@ form input[type=text] {
 .spinner img {
     padding: 10px;
 }
+
+form {
+    border : 0px;
+    margin : 0px;
+    padding : 0px;
+}
+
+.username {
+    /*font-weight: bold;*/
+}
+
+.friend {
+    font-weight: bold;
+}

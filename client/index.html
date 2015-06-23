@@ -16,14 +16,32 @@
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
+      <ul id="friends">Friends List
+
+      </ul>
+      <div id="rooms">Rooms
+      <select id="roomSelect" name="roomSelect">
+        <option value="default">Default</option>
+      </select>
+      </div>
+
+
       <form id="send" action="#" method="post">
         Insert message:<br>
-        <input type="text" id="message" name="message"></input>
+        <!-- <input type="text" id="message"></input> -->
+        <textarea id="message" rows="10" cols="85"></textarea>
+
         <br>
-        <button type="button" name="submit" class="submit">Submit Message</button>
+        <button type="submit" class="submit">Submit Message</button>
       </form>
+      <form id="clear" action="#">
+        <button type="submit">Clear the messages</button>
+      </form>
+      <form id="fetch" action="#">
+        <button type="submit">Fetch messages</button>
+      </form>
+
       <div id="chats"></div>
-      <div id="roomSelect"></div>
     </div>
   </body>
 </html>
