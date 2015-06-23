@@ -7,11 +7,9 @@ app.init = function(){
   $(document).ready(function(){
     //Add room
     $('#addRoom').on("submit", function(e){
-      debugger
-
-      e.preventDefault()
-      var roomname = $("#addRoomName").val()
-      app.addRoom(roomname)
+      e.preventDefault();
+      var roomname = $("#addRoomName").val();
+      app.addRoom(roomname);
     })
     // Rooms dropdown event handler
     $('#roomSelect').on('change', function(){
@@ -20,37 +18,42 @@ app.init = function(){
     });
     // Submit new message handler
     $("#send").on('submit', function(e){
-      // debugger;
       e.preventDefault();
-      var message = {}
+      var message = {};
       var text = $("#message").val();
       message.text = text;
-      message.username = window.location.search.match(/username=(.*)/)[1] //finds username?
+      message.username = window.location.search.match(/username=(.*)/)[1]; //finds username?
       message.roomname = $("#roomSelect").val()
 
       // May want to check for the form just in case some null data is entered
       // app.addMessage(message);
       app.send(message);
-      app.clearMessages();
-      app.fetch('https://api.parse.com/1/classes/chatterbox');
+
+      $("#chats").prepend('<div class="message"><span class="username"></span><span class="txt"></span></div>');
+      var newNode = $(".message").first();
+      newNode.find('span.username').text(message.username);
+      newNode.find('span.txt').text(" : " + message.text);
+      newNode.attr('room', message.roomname);
+      // app.clearMessages();
+      // app.fetch('https://api.parse.com/1/classes/chatterbox');
     });
 
     // Add friend handler
     $("#main").on('click', '.username', function(){
-      debugger;
-      var username = $(this).text()
-      var usernamez = $(".username")
+      // debugger;
+      var username = $(this).text();
+      var usernamez = $(".username");
       if(app.addFriend(username)){
         for (var i = 0; i < usernamez.length; i++) {
           if ($(usernamez[i]).text() === username) {
-            $(usernamez[i]).addClass("friend")
+            $(usernamez[i]).addClass("friend");
           }
         }
       }else{
         // remove friend
         for (var i = 0; i < usernamez.length; i++) {
           if ($(usernamez[i]).text() === username) {
-            $(usernamez[i]).removeClass("friend")
+            $(usernamez[i]).removeClass("friend");
           }
         }
         // remove a render
@@ -75,13 +78,6 @@ app.init = function(){
 
   // Initial fetch
   app.fetch('https://api.parse.com/1/classes/chatterbox');
-
-  // Populate room list
-
-  // Clicking on rooms will only show messages in that room
-
-  // Clicking on friends will display friends in the friendlist
-    // Add to their username class "friend" which will auto-bold
 }
 
 app.send = function(message){
@@ -116,13 +112,13 @@ app.fetch = function(fetchUrl, roomChange) {
       for(var i = 0; i < data.results.length; i++){
         app.addMessage(data.results[i]);
       }
-      if (roomChange) {
+      if (roomChange) {      // Case where the fetch is conditional on a room change
         var currentRoom = $("#roomSelect").val(); //check current room
         if (currentRoom !== "main"){
-          var $message = $(".message")
+          var $message = $(".message");
           for (var i = 0; i < $message.length; i++){
             if ($($message[i]).attr("room") !== currentRoom){
-              $($message[i]).remove()
+              $($message[i]).remove();
             }
           }
         }
@@ -142,8 +138,8 @@ app.clearMessages = function(){
 app.addMessage = function(message){
   // debugger;
   message = message || {};
-  if (message.username === undefined && message.text === undefined)
-    return
+  if (message.username === undefined || message.text === undefined || message.text === "")
+    return;
   message.username = message.username || "undefined";
   message.text = message.text || "";
   message.roomname = message.roomname || 'main';
@@ -169,23 +165,27 @@ app.addMessage = function(message){
 
 app.addRoom = function(room){
   if (!(room in app.rooms)){
-    $('#roomSelect').append('<option value='+room+'>' + room + '</option>');
+    // debugger;
+    $('#roomSelect').append('<option></option>');
+    $('#roomSelect option').last().attr('value', room);
+    $('#roomSelect option').last().text(room);
+
     app.rooms[room] = 1;
   }
 }
 
 app.addFriend = function(username){
-  // Adds friends to the internal javascript friend array
-  var status = false
-  // render it nowf
-  var addElement = "<li id="+username+">" + username + " </li>"
+  var status = false;
+  var addElement = "<li></li>";
   if (!app.friends[username]) {
-    $("#friends").append(addElement)
-    status = true
+    // Enter if the username is new
+    $("#friends").append(addElement);
+    $('#friends').children().last().attr('id',username);
+    $('#friends').children().last().text(username);
+    status = true;
     app.friends[username] = true;
   }
-    // Find the UL with friends (id = #friends)
-      // Append an LI tag to the friends
+
   return status;
 }
 
@@ -193,5 +193,5 @@ app.handleSubmit = function(message) {
   app.addMessage(message);
 }
 
-app.init()
+app.init();
 
