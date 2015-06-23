@@ -1,9 +1,32 @@
 var app = {}
 app.friends = {};
+app.rooms = {};
 
 app.init = function(){
   // Event handlers
   $(document).ready(function(){
+    // Rooms dropdown event handler
+    $('#roomSelect').on('change', function(){
+      debugger;
+      // If we select Main, then show everything
+      var currentRoom = $(this).val()
+      if (currentRoom !== "main"){
+        app.clearMessages();
+        app.fetch('https://api.parse.com/1/classes/chatterbox');
+        // Select every message (id=message)
+          // check room attribute
+        var $message = $(".message")
+        for (var i = 0; i < $message.length; i++){
+          if ($message[i].attr("room") !== currentRoom){
+            $message[i].remove()
+          }
+        }
+      }
+      // fetch all
+        // filter based off room
+        // call add messages on the filtered set
+    });
+
     // Submit new message handler
     $("#send").on('submit', function(e){
       debugger;
@@ -126,12 +149,20 @@ app.addMessage = function(message){
     return
   message.username = message.username || "undefined";
   message.text = message.text || "";
+  message.roomname = message.roomname || 'main';
+
+  // Check for if it's in the room or not
+  if(!(message.roomname in app.rooms)){
+    //if its in room, switch to room
+    app.addRoom(message.roomname);
+  }
 
   // Creates node and fills in values
   var currentNode = $('#chats').append('<div class="message"><span class="username"></span><span class="txt"></span></div>');
   currentNode = currentNode.children().last();
   currentNode.find('span.username').text(message.username);
   currentNode.find('span.txt').text(" : " + message.text);
+  currentNode.attr('room', message.roomname);
 
  // If the message is made by a friend, then autobold
   if (message.username in app.friends) {
@@ -140,7 +171,8 @@ app.addMessage = function(message){
 }
 
 app.addRoom = function(room){
-  $('#roomSelect').append('<div>' + JSON.stringify(room) + '</div>');
+  $('#roomSelect').append('<option value='+room+'>' + room + '</option>');
+  app.rooms[room] = 1;
 }
 
 app.addFriend = function(username){
