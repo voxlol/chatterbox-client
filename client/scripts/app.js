@@ -37,7 +37,7 @@ app.init = function(){
 
     // Add friend handler
     $("#main").on('click', '.username', function(){
-      // debugger;
+      debugger;
       var username = $(this).text()
       var usernamez = $(".username")
       if(app.addFriend(username)){
@@ -182,10 +182,10 @@ app.addFriend = function(username){
   if (!app.friends[username]) {
     $("#friends").append(addElement)
     status = true
+    app.friends[username] = true;
   }
     // Find the UL with friends (id = #friends)
       // Append an LI tag to the friends
-  app.friends[username] = true;
   return status;
 }
 
