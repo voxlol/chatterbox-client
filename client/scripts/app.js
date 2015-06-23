@@ -5,15 +5,19 @@ app.init = function(){
   // Event handlers
   $(document).ready(function(){
     // Submit new message handler
-    $("#send").on('submit', function(){
+    $("#send").on('submit', function(e){
+      debugger;
+      e.preventDefault();
       var message = {}
       var text = $("#message").val();
       message.text = text;
       message.username = window.location.search.match(/username=(.*)/)[1] //finds username?
 
       // May want to check for the form just in case some null data is entered
-      app.addMessage(message);
-      app.send(message)
+      // app.addMessage(message);
+      app.send(message);
+      app.clearMessages();
+      app.fetch('https://api.parse.com/1/classes/chatterbox');
     });
 
     // Add friend handler
@@ -102,6 +106,7 @@ app.fetch = function(fetchUrl) {
       for(var i = 0; i < data.results.length; i++){
         app.addMessage(data.results[i]);
       }
+
     },
     error: function (data) {
       // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -128,11 +133,10 @@ app.addMessage = function(message){
   currentNode.find('span.username').text(message.username);
   currentNode.find('span.txt').text(" : " + message.text);
 
-  // For roomnames
-  if(message.roomname)
-    currentNode.attr('room', message.roomname);
-  else
-    currentNode.attr('room', 'default');
+ // If the message is made by a friend, then autobold
+  if (message.username in app.friends) {
+    currentNode.find('span.username').addClass('friend');
+  }
 }
 
 app.addRoom = function(room){
