@@ -1,18 +1,19 @@
 body {
-    background: #eee;
+    background: #4B4D52;
     text-align: center;
     padding: 0 25px;
-    font-family: arial, sans-serif;
-}
+    font-family: 'Oswald', sans-serif;
+        }
 
 #main {
-    width: 500px;
+    width: 700px;
     margin: auto;
     text-align: left;
-    background: white;
+    background: #FFF2E7;
     padding: 50px 60px;
-    border: solid #ddd;
-    border-width: 0 1px 1px 1px;
+    border: solid #DEA642;
+    border-width: 20px 20px 20px 20px;
+
 }
 
 #main h1 {
@@ -63,6 +64,8 @@ form input[type=text] {
     padding: 5px;
     margin-bottom: 5px;
     background-color: #eee;
+    font-family: 'Cinzel', serif;
+
 }
 
 .chat .username {

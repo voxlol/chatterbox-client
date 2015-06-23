@@ -7,29 +7,13 @@ app.init = function(){
   $(document).ready(function(){
     // Rooms dropdown event handler
     $('#roomSelect').on('change', function(){
-      debugger;
-      // If we select Main, then show everything
-      var currentRoom = $(this).val()
-      if (currentRoom !== "main"){
         app.clearMessages();
-        app.fetch('https://api.parse.com/1/classes/chatterbox');
-        // Select every message (id=message)
-          // check room attribute
-        var $message = $(".message")
-        for (var i = 0; i < $message.length; i++){
-          if ($message[i].attr("room") !== currentRoom){
-            $message[i].remove()
-          }
-        }
-      }
-      // fetch all
-        // filter based off room
-        // call add messages on the filtered set
+        app.fetch('https://api.parse.com/1/classes/chatterbox', true);
     });
 
     // Submit new message handler
     $("#send").on('submit', function(e){
-      debugger;
+      // debugger;
       e.preventDefault();
       var message = {}
       var text = $("#message").val();
@@ -48,9 +32,7 @@ app.init = function(){
       // debugger;
       var username = $(this).text()
       var usernamez = $(".username")
-
       if(app.addFriend(username)){
-
         for (var i = 0; i < usernamez.length; i++) {
           if ($(usernamez[i]).text() === username) {
             $(usernamez[i]).addClass("friend")
@@ -65,11 +47,8 @@ app.init = function(){
         }
         // remove a render
         $("#"+username).remove();
-
         delete app.friends[username];
       }
-
-
     })
 
     // Clear message button handler
@@ -114,7 +93,7 @@ app.send = function(message){
   });
 }
 
-app.fetch = function(fetchUrl) {
+app.fetch = function(fetchUrl, roomChange) {
   $.ajax({
     // This is the url you should use to communicate with the parse API server.
     // url: 'https://api.parse.com/1/classes/chatterbox',
@@ -129,7 +108,17 @@ app.fetch = function(fetchUrl) {
       for(var i = 0; i < data.results.length; i++){
         app.addMessage(data.results[i]);
       }
-
+      if (roomChange) {
+        var currentRoom = $("#roomSelect").val(); //check current room
+        if (currentRoom !== "main"){
+          var $message = $(".message")
+          for (var i = 0; i < $message.length; i++){
+            if ($($message[i]).attr("room") !== currentRoom){
+              $($message[i]).remove()
+            }
+          }
+        }
+      }
     },
     error: function (data) {
       // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
