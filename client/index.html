@@ -23,19 +23,23 @@
 
       </ul>
       <div id="rooms">Rooms
-      <select id="roomSelect" name="roomSelect">
-        <option value="default">Main</option>
-      </select>
+        <select id="roomSelect" name="roomSelect">
+          <option value="default">Main</option>
+        </select>
+        <form id="addRoom" action="#" method="post">
+          <br>
+          <textarea id="addRoomName" rows "1" cols="20"></textarea>
+          <br>
+          <button type="submit">Add Room</button>
+        </form>
+
       </div>
 
 
       <form id="send" action="#" method="post">
         Insert message:<br>
         <!-- <input type="text" id="message"></input> -->
-        <textarea id="message" rows="10" cols="115"></textarea>
-
-        <br>
-        <button type="submit" class="submit">Submit Message</button>
+        <textarea id="message" rows="10" cols="115"></textarea> <button type="submit" class="submit">Submit Message</button>
       </form>
       <form id="clear" action="#">
         <button type="submit">Clear the messages</button>

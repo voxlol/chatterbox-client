@@ -5,12 +5,19 @@ app.rooms = {};
 app.init = function(){
   // Event handlers
   $(document).ready(function(){
+    //Add room
+    $('#addRoom').on("submit", function(e){
+      debugger
+
+      e.preventDefault()
+      var roomname = $("#addRoomName").val()
+      app.addRoom(roomname)
+    })
     // Rooms dropdown event handler
     $('#roomSelect').on('change', function(){
         app.clearMessages();
         app.fetch('https://api.parse.com/1/classes/chatterbox', true);
     });
-
     // Submit new message handler
     $("#send").on('submit', function(e){
       // debugger;
@@ -19,6 +26,7 @@ app.init = function(){
       var text = $("#message").val();
       message.text = text;
       message.username = window.location.search.match(/username=(.*)/)[1] //finds username?
+      message.roomname = $("#roomSelect").val()
 
       // May want to check for the form just in case some null data is entered
       // app.addMessage(message);
@@ -160,8 +168,10 @@ app.addMessage = function(message){
 }
 
 app.addRoom = function(room){
-  $('#roomSelect').append('<option value='+room+'>' + room + '</option>');
-  app.rooms[room] = 1;
+  if (!(room in app.rooms)){
+    $('#roomSelect').append('<option value='+room+'>' + room + '</option>');
+    app.rooms[room] = 1;
+  }
 }
 
 app.addFriend = function(username){
