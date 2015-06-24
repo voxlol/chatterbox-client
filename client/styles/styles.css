@@ -1,22 +1,28 @@
 body {
-    background: #4B4D52;
-    text-align: center;
+/*    background: #4B4D52;
+*/    text-align: center;
     padding: 0 25px;
     font-family: 'Ubuntu', sans-serif;
     color: #FFFFFF;
     -moz-box-shadow: 0px 1px 0px 0px #1c1b18;
     -webkit-box-shadow: 0px 1px 0px 0px #1c1b18;
     box-shadow: 0px 1px 0px 0px #1c1b18;
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #eae0c2), color-stop(1, #ccc2a6));
+ /*   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #eae0c2), color-stop(1, #ccc2a6));
     background:-moz-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
     background:-webkit-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
     background:-o-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
     background:-ms-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
     background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eae0c2', endColorstr='#ccc2a6',GradientType=0);
-    background-color:#eae0c2;
+    background-color:#eae0c2;*/
+}
 
-
+html {
+  background: url(http://www.roundtree7.com/wp-content/uploads/2012/08/gradient-background-8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #main {
@@ -25,11 +31,11 @@ body {
     text-align: left;
 /*    background: #FFF2E7;
 */    padding: 50px 60px;
-    border: 20px solid #3ACFD5;
+    border: 10px solid #3ACFD5;
 
-    border-width: 20px 20px 20px 20px;
-    border-top: 20px solid #3ACFD5;
-    border-bottom: 20px solid #3a4ed5;
+    border-width: 10px 10px 10px 10px;
+    border-top: 10px solid #3ACFD5;
+    border-bottom: 10px solid #3a4ed5;
     box-shadow: 10px 10px 5px #888888;
     background: #1e5799; /* Old browsers */
     background: -moz-linear-gradient(top,  #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); /* FF3.6+ */
